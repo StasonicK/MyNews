@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardElevation="@dimen/card_elevation">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <!-- News block -->
-        <RelativeLayout
-            android:id="@+id/newsImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/newsAuthor"
-                style="@style/NewsArticle.Author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                tools:text="@string/holder_author" />
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/newsAuthor"
+            style="@style/NewsArticle.Author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/holder_author" />
 
         <!-- News Title -->
         <TextView
@@ -29,7 +28,9 @@
             style="@style/NewsArticle.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/newsImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/newsAuthor"
             tools:text="@string/holder_title" />
 
         <!-- Publish at -->
@@ -39,7 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/newsTitle"
-            android:layout_marginStart="@dimen/normal_padding"
+            app:layout_constraintBottom_toTopOf="@+id/newsTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/holder_date" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -10,7 +10,6 @@ class NewsArticleResponseToUiMapper : BaseMapper<NewsArticleResponse, NewsArticl
         val newsArticleUI = NewsArticleUI()
         type.let {
             it?.apply {
-                newsArticleUI.id = source.id ?: "0"
                 newsArticleUI.author = author
                 newsArticleUI.title = title
                 newsArticleUI.description = description

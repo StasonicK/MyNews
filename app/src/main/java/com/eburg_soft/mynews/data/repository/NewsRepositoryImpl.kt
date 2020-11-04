@@ -11,16 +11,18 @@ class NewsRepositoryImp @Inject constructor(
 ) : NewsRepository {
 
     // fetch from API news and map data for UI
-    override suspend fun getTopHeadlinesInTheUsForUI(): List<NewsArticleUI> {
-        val response = newsApi.getTopHeadlinesInTheUs()
-        val result: ArrayList<NewsArticleUI> = arrayListOf()
+    override suspend fun getTopHeadlinesInTheUsForUI(pageNumber: Int): Pair<ArrayList<NewsArticleUI>, Int> {
+        val response = newsApi.getTopHeadlinesInTheUs(pageNumber = pageNumber)
+        val size = response?.totalResults ?: 0
+        val list: ArrayList<NewsArticleUI> = arrayListOf()
         response.let { response1 ->
             response1?.articleResponses.let {
                 it?.forEach { newsArticleResponse ->
-                    result.add(newsArticleResponseToUiMapper.map(newsArticleResponse))
+
+                    list.add(newsArticleResponseToUiMapper.map(newsArticleResponse))
                 }
             }
         }
-        return result
+        return list to size
     }
 }

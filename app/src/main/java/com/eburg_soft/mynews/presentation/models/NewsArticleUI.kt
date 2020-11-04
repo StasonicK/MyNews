@@ -3,9 +3,6 @@ package com.eburg_soft.mynews.presentation.models
 import com.google.gson.annotations.SerializedName
 
 data class NewsArticleUI(
-    @SerializedName("id")
-    var id: String,
-
     /**
      * Name of the author for the article
      */

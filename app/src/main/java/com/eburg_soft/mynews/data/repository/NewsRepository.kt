@@ -4,5 +4,5 @@ import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 
 interface NewsRepository {
 
-     suspend fun getTopHeadlinesInTheUsForUI(): List<NewsArticleUI>
+     suspend fun getTopHeadlinesInTheUsForUI(pageNumber:Int=1): Pair<ArrayList<NewsArticleUI>,Int>
 }
