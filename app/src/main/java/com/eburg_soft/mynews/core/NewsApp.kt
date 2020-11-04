@@ -20,17 +20,17 @@ class NewsApp : Application() {
         Timber.d("App is created")
     }
 
-    private fun initTimber() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-    }
-
     private fun initToothpick() {
         if (BuildConfig.DEBUG) Configuration.forDevelopment()
             .preventMultipleRootScopes() else Configuration.forProduction()
 
         Toothpick.openScope(Scopes.APP)
             .installModules(RepositoryModule(), NetworkModule())
+    }
+
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }

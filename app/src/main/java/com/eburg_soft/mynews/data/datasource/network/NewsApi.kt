@@ -1,7 +1,7 @@
 package com.eburg_soft.mynews.data.datasource.network
 
 import com.eburg_soft.mynews.core.NEWS_API_KEY
-import com.eburg_soft.mynews.data.datasource.network.models.NewsResponse
+import com.eburg_soft.mynews.data.datasource.network.models.NewsMainResponse
 import retrofit2.http.GET
 
 /**
@@ -17,5 +17,5 @@ interface NewsApi {
      * See [article documentation](https://newsapi.org/docs/endpoints/top-headlines).
      */
     @GET("top-headlines?country=us&apiKey=${NEWS_API_KEY}y")
-    suspend fun getTopHeadlinesInTheUs(): NewsResponse?
+    suspend fun getTopHeadlinesInTheUs(): NewsMainResponse?
 }

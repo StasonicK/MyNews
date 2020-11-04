@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margins -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="card_margin">8sp</dimen>
+
+    <!-- paddings -->
+    <dimen name="normal_padding">12dp</dimen>
+
+    <!-- elevations -->
+    <dimen name="card_elevation">6dp</dimen>
+
+    <!-- sizes -->
+    <dimen name="textview_size_normal">14sp</dimen>
+    <dimen name="image_size">180dp</dimen>
+    <dimen name="textview_size_small">12sp</dimen>
+</resources>
