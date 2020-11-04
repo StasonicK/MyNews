@@ -13,5 +13,5 @@ data class NewsResponse(
     val totalResults: Int = 0,
 
     @SerializedName("articles")
-    val articles: List<NewsArticle> = emptyList()
+    val articleResponses: List<NewsArticleResponse> = emptyList()
 )
