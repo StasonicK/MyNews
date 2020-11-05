@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Describes the response from news service API.
  */
-data class NewsResponse(
+data class NewsMainResponse(
     @SerializedName("status")
     val status: String = "",
 
@@ -13,5 +13,5 @@ data class NewsResponse(
     val totalResults: Int = 0,
 
     @SerializedName("articles")
-    val articles: List<NewsArticle> = emptyList()
+    val articleResponses: List<NewsArticleResponse> = emptyList()
 )

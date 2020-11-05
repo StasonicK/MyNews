@@ -94,9 +94,17 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // androidx.fragment
+    def fragment_version = "1.2.5" // must use for container
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
     // Material design
     def material_version = "1.2.1"
     implementation "com.google.android.material:material:$material_version"
+
+    // Paging
+    def paging_version = "1.0.1"
+    implementation "android.arch.paging:runtime:$paging_version"
 
     // Coroutines
     def coroutines_version = '1.3.9'
