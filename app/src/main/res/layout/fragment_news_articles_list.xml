@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.newslist.NewsListFragment">
+    tools:context=".presentation.newsarticleslist.NewsArticlesListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_news"
@@ -13,6 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_news" />
+        tools:listitem="@layout/item_news_article" />
 
 </FrameLayout>

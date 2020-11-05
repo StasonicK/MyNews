@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/newsListFragment"
-        android:name="com.eburg_soft.mynews.presentation.newslist.NewsListFragment"
+        android:name="com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticlesListFragment"
         android:label="fragment_news_list"
-        tools:layout="@layout/fragment_news_list">
+        tools:layout="@layout/fragment_news_articles_list">
         <action
             android:id="@+id/action_newsListFragment_to_singleNewsFragment"
             app:destination="@id/singleNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleNewsFragment"
-        android:name="com.eburg_soft.mynews.presentation.detailednews.DetailedNewsFragment"
+        android:name="com.eburg_soft.mynews.presentation.detailednewsarticle.DetailedNewsArticleFragment"
         android:label="fragment_single_news"
-        tools:layout="@layout/fragment_detailed_news" />
+        tools:layout="@layout/fragment_detailed_news_article" />
 </navigation>

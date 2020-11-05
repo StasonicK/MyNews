@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.detailednews.DetailedNewsFragment">
+    tools:context=".presentation.detailednewsarticle.DetailedNewsArticleFragment">
 
     <include
         android:id="@+id/toolbarDetailedNewsFragment"
@@ -17,18 +17,19 @@
 
     <ImageView
         android:id="@+id/imageViewNews"
+        style="@style/NewsArticleDetailed.Image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/image_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarDetailedNewsFragment" />
 
     <TextView
         android:id="@+id/textViewAuthor"
+        style="@style/NewsArticleDetailed.Author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anonymous author"
+        tools:text="Anonymous author"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewNews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"

@@ -147,6 +147,9 @@ dependencies {
     implementation "com.github.stephanenicolas.toothpick:smoothie-androidx:$toothpick_version"
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick_version"
 
+    //  Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //  Logging TimberKt
     implementation 'com.github.ajalt:timberkt:1.5.1'
 

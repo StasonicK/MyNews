@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import androidx.paging.PageKeyedDataSource
 import com.eburg_soft.mynews.core.PAGE_SIZE

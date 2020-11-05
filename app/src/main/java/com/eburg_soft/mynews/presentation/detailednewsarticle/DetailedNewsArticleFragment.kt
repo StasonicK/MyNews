@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.detailednews
+package com.eburg_soft.mynews.presentation.detailednewsarticle
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
 import timber.log.Timber
 
-class DetailedNewsFragment : Fragment(R.layout.fragment_detailed_news) {
+class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_article) {
     private lateinit var toolbar: Toolbar
 
     companion object {
@@ -54,7 +54,7 @@ class DetailedNewsFragment : Fragment(R.layout.fragment_detailed_news) {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detailed_news, container, false)
+        return inflater.inflate(R.layout.fragment_detailed_news_article, container, false)
     }
 
 

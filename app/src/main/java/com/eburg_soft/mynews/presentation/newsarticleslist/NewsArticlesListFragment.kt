@@ -1,10 +1,7 @@
-package com.eburg_soft.mynews.presentation.newslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eburg_soft.currencyconverter.data.di.Scopes
@@ -15,13 +12,13 @@ import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import kotlinx.android.synthetic.main.fragment_news_list.recyclerview_news
 import timber.log.Timber
 
-class NewsListFragment() : Fragment(R.layout.fragment_news_list) {
+class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list) {
 
     private var savedInstanceState: Bundle? = null
     private val newsArticleAdapter = NewsArticleAdapter()
 
-    private val viewModel: NewsListViewModel by lazy {
-        injectViewModel(NewsListViewModel::class, Scopes.NewsList)
+    private val mViewModelArticles: NewsArticlesListViewModel by lazy {
+        injectViewModel(NewsArticlesListViewModel::class, Scopes.NewsList)
     }
 
     companion object {
@@ -48,7 +45,7 @@ class NewsListFragment() : Fragment(R.layout.fragment_news_list) {
     //endregion
 
     private fun observerLiveData() {
-        observe(viewModel.getNewsList()) { showNewsList(it) }
+        observe(mViewModelArticles.getNewsList()) { showNewsList(it) }
     }
 
     private fun showNewsList(news: PagedList<NewsArticleUI>) {
