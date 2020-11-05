@@ -62,7 +62,7 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
                 callback.onResult(data.first, null)
                 Timber.d("nextPage = null")
             }
-            Timber.i(
+            Timber.d(
                 "data: /n" +
                         "$data.first"
             )
