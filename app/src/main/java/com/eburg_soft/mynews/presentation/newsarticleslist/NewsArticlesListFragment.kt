@@ -37,37 +37,12 @@ class NewsListFragment() : Fragment(R.layout.fragment_news_list) {
         this.savedInstanceState = savedInstanceState
 
         observerLiveData()
-        // handle back button
-//        requireActivity().onBackPressedDispatcher.addCallback(
-//            requireActivity(),
-//            object : OnBackPressedCallback(true) {
-//                override fun handleOnBackPressed() {
-//                    Timber.d("Activity back pressed invoked")
-//                    // if you want onBackPressed() to be called as normal afterwards
-//                    if (isEnabled) {
-//                        isEnabled = false
-//                        view?.let { Navigation.findNavController(it).navigateUp() }
-//                    }
-//                }
-//            }
-//        )
         Timber.d("onActivityCreated()")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         saveRecyclerViewState(outState)
         super.onSaveInstanceState(outState)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            // handle navigateUp
-            android.R.id.home -> {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     //endregion

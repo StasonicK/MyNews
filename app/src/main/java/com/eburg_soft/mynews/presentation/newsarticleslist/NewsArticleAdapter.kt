@@ -8,17 +8,17 @@ import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.inflate
 import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import com.eburg_soft.mynews.presentation.newslist.NewsArticleAdapter.NewsArticleHolder
-import kotlinx.android.synthetic.main.item_news.view.newsAuthor
-import kotlinx.android.synthetic.main.item_news.view.newsPublishedAt
-import kotlinx.android.synthetic.main.item_news.view.newsTitle
+import kotlinx.android.synthetic.main.item_news.view.newsAuthorItem
+import kotlinx.android.synthetic.main.item_news.view.newsPublishedAtItem
+import kotlinx.android.synthetic.main.item_news.view.newsTitleItem
 
 class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
 
     class NewsArticleHolder(view: View) : ViewHolder(view) {
 
-        private val author = itemView.newsAuthor
-        private val title = itemView.newsTitle
-        private val publishedAt = itemView.newsPublishedAt
+        private val author = itemView.newsAuthorItem
+        private val title = itemView.newsTitleItem
+        private val publishedAt = itemView.newsPublishedAtItem
 
         fun bind(item: NewsArticleUI?) {
             author.text = item?.author

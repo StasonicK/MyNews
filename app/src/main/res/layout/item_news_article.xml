@@ -1,12 +1,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/NewsArticle.View"
+    style="@style/NewsArticleItem.View"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/card_background"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,8 +11,8 @@
 
         <!-- News block -->
         <TextView
-            android:id="@+id/newsAuthor"
-            style="@style/NewsArticle.Author"
+            android:id="@+id/newsAuthorItem"
+            style="@style/NewsArticleItem.Author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,23 +21,23 @@
 
         <!-- News Title -->
         <TextView
-            android:id="@+id/newsTitle"
-            style="@style/NewsArticle.Title"
+            android:id="@+id/newsTitleItem"
+            style="@style/NewsArticleItem.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/newsAuthor"
+            app:layout_constraintTop_toBottomOf="@id/newsAuthorItem"
             tools:text="@string/holder_title" />
 
         <!-- Publish at -->
         <TextView
-            android:id="@+id/newsPublishedAt"
-            style="@style/NewsArticle.PublishedAt"
+            android:id="@+id/newsPublishedAtItem"
+            style="@style/NewsArticleItem.PublishedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/newsTitle"
-            app:layout_constraintBottom_toTopOf="@+id/newsTitle"
+            android:layout_below="@+id/newsTitleItem"
+            app:layout_constraintBottom_toTopOf="@+id/newsTitleItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/holder_date" />
