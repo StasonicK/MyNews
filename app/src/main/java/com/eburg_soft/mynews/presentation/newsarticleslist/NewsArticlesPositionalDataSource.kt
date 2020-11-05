@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import androidx.paging.PageKeyedDataSource
 import com.eburg_soft.mynews.core.PAGE_SIZE
@@ -13,7 +13,7 @@ import timber.log.Timber
 import java.math.RoundingMode.CEILING
 import javax.inject.Inject
 
-class NewsDataSource @Inject constructor(private val repository: NewsRepository) :
+class NewsArticlesPositionalDataSource @Inject constructor(private val repository: NewsRepository) :
     PageKeyedDataSource<Int, NewsArticleUI>() {
 
     private val job = Job()

@@ -24,7 +24,7 @@ class NewsApp : Application() {
         if (BuildConfig.DEBUG) Configuration.forDevelopment()
             .preventMultipleRootScopes() else Configuration.forProduction()
 
-        Toothpick.openScope(Scopes.APP)
+        Toothpick.openScope(Scopes.app)
             .installModules(RepositoryModule(), NetworkModule())
     }
 

@@ -8,4 +8,6 @@
     <!-- Other colors -->
     <color name="color_transparent">#33000000</color>
     <color name="card_background">#A5D6A7</color>
+    <color name="green">#850CAF50</color>
+    <color name="blue">#8500BCD4</color>
 </resources>

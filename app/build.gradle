@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "de.mannodermaus.android-junit5"
@@ -146,6 +147,9 @@ dependencies {
     implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpick_version"
     implementation "com.github.stephanenicolas.toothpick:smoothie-androidx:$toothpick_version"
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick_version"
+
+    //  Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //  Logging TimberKt
     implementation 'com.github.ajalt:timberkt:1.5.1'

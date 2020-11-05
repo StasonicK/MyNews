@@ -1,7 +1,10 @@
 package com.eburg_soft.mynews.presentation.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class NewsArticleUI(
     /**
      * Name of the author for the article
@@ -38,7 +41,7 @@ data class NewsArticleUI(
      */
     @SerializedName("publishedAt")
     var publishedAt: String? = null
-) {
+) : Parcelable {
 
     constructor() : this(
         author = null,

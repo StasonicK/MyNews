@@ -3,20 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/newsListFragment">
+    app:startDestination="@id/newsArticlesListFragment">
 
     <fragment
-        android:id="@+id/newsListFragment"
-        android:name="com.eburg_soft.mynews.presentation.newslist.NewsListFragment"
-        android:label="fragment_news_list"
-        tools:layout="@layout/fragment_news_list">
+        android:id="@+id/newsArticlesListFragment"
+        android:name="com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticlesListFragment"
+        android:label="FragmentNewsArticlesList"
+        tools:layout="@layout/fragment_news_articles_list">
         <action
-            android:id="@+id/action_newsListFragment_to_singleNewsFragment"
-            app:destination="@id/singleNewsFragment" />
+            android:id="@+id/openDetailedNewsArticleFragment"
+            app:destination="@id/detailedNewsArticleFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/singleNewsFragment"
-        android:name="com.eburg_soft.mynews.presentation.detailednews.DetailedNewsFragment"
-        android:label="fragment_single_news"
-        tools:layout="@layout/fragment_detailed_news" />
+        android:id="@+id/detailedNewsArticleFragment"
+        android:name="com.eburg_soft.mynews.presentation.detailednewsarticle.DetailedNewsArticleFragment"
+        android:label="FragmentDetailedNewsArticle"
+        tools:layout="@layout/fragment_detailed_news_article"
+        >
+        <argument
+            android:name="url"
+            app:argType="com.eburg_soft.mynews.presentation.models.NewsArticleUI" />
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +12,7 @@ import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsListViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
+class NewsArticlesListViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
 
     private var newsList: LiveData<PagedList<NewsArticleUI>>? = null
 
@@ -31,7 +31,7 @@ class NewsListViewModel @Inject constructor(private val repository: NewsReposito
         viewModelScope.launch {
             val dataSourceFactory = object : DataSource.Factory<Int, NewsArticleUI>() {
                 override fun create(): DataSource<Int, NewsArticleUI> {
-                    return NewsDataSource(repository)
+                    return NewsArticlesPositionalDataSource(repository)
                 }
             }
             newsList = LivePagedListBuilder(dataSourceFactory, config).build()
