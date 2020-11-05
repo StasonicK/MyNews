@@ -9,7 +9,7 @@
         android:id="@+id/newsListFragment"
         android:name="com.eburg_soft.mynews.presentation.newslist.NewsListFragment"
         android:label="fragment_news_list"
-        tools:layout="@layout/fragment_news_list" >
+        tools:layout="@layout/fragment_news_list">
         <action
             android:id="@+id/action_newsListFragment_to_singleNewsFragment"
             app:destination="@id/singleNewsFragment" />

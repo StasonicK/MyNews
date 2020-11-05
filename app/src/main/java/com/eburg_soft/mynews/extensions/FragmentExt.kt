@@ -13,8 +13,8 @@ import com.eburg_soft.mynews.data.di.ToothpickViewModelFactory
 import com.eburg_soft.mynews.data.di.ToothpickViewModelFactoryScoped
 import kotlin.reflect.KClass
 
-fun <T : Any?> Fragment.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(viewLifecycleOwner, Observer {
+fun <T : Any?> Fragment.observe(liveData: LiveData<T>?, observer: (T) -> Unit) {
+    liveData?.observe(viewLifecycleOwner, {
         it?.let(observer)
     })
 }

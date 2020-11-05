@@ -5,12 +5,13 @@ import com.eburg_soft.mynews.presentation.mappers.NewsArticleResponseToUiMapper
 import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import javax.inject.Inject
 
-class NewsRepositoryImp @Inject constructor(
-    private val newsApi: NewsApi,
-    private val newsArticleResponseToUiMapper: NewsArticleResponseToUiMapper
+class NewsRepositoryImpl @Inject constructor(
+    private val newsApi: NewsApi
 ) : NewsRepository {
 
-    // fetch from API news and map data for UI
+    private val newsArticleResponseToUiMapper = NewsArticleResponseToUiMapper()
+
+    // fetch news from API  and map data for UI
     override suspend fun getTopHeadlinesInTheUsForUI(pageNumber: Int): Pair<ArrayList<NewsArticleUI>, Int> {
         val response = newsApi.getTopHeadlinesInTheUs(pageNumber = pageNumber)
         val size = response?.totalResults ?: 0

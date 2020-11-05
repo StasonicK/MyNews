@@ -46,6 +46,7 @@ data class NewsArticleResponse(
     @SerializedName("content")
     val content: String? = null
 ) {
+
     data class Source(
 
         @SerializedName("id")

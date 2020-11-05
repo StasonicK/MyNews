@@ -15,9 +15,10 @@ import kotlinx.android.synthetic.main.item_news.view.newsTitle
 class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
 
     class NewsArticleHolder(view: View) : ViewHolder(view) {
+
         private val author = itemView.newsAuthor
         private val title = itemView.newsTitle
-        val publishedAt = itemView.newsPublishedAt
+        private val publishedAt = itemView.newsPublishedAt
 
         fun bind(item: NewsArticleUI?) {
             author.text = item?.author

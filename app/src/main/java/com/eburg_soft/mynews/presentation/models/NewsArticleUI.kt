@@ -39,5 +39,13 @@ data class NewsArticleUI(
     @SerializedName("publishedAt")
     var publishedAt: String? = null
 ) {
-    constructor()
+
+    constructor() : this(
+        author = null,
+        title = null,
+        description = null,
+        url = null,
+        urlToImage = null,
+        publishedAt = null
+    )
 }

@@ -1,12 +1,10 @@
 package com.eburg_soft.mynews.presentation.newslist
 
 import androidx.paging.PageKeyedDataSource
-import com.eburg_soft.mynews.core.PAGE_SIZE
 import com.eburg_soft.mynews.data.repository.NewsRepository
 import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,6 +16,7 @@ class NewsDataSource @Inject constructor(private val repository: NewsRepository)
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
     companion object {
+
         var currentPage = 1
         var size = 0
     }
@@ -28,7 +27,7 @@ class NewsDataSource @Inject constructor(private val repository: NewsRepository)
             val nextPage = currentPage
             val data = repository.getTopHeadlinesInTheUsForUI()
             size = data.second
-            if (isNextPageNumber(data.second, PAGE_SIZE, currentPage)) {
+            if (isNextPageNumber(data.second, params.requestedLoadSize, currentPage)) {
                 callback.onResult(data.first, null, nextPage)
             } else {
                 callback.onResult(data.first, null, null)
@@ -44,7 +43,7 @@ class NewsDataSource @Inject constructor(private val repository: NewsRepository)
             currentPage++
             val nextPage = currentPage
             val data = repository.getTopHeadlinesInTheUsForUI(pageNumber = currentPage)
-            if (isNextPageNumber(size, PAGE_SIZE, currentPage)) {
+            if (isNextPageNumber(size, params.requestedLoadSize, currentPage)) {
                 callback.onResult(data.first, nextPage)
             } else {
                 callback.onResult(data.first, null)

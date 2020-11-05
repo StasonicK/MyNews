@@ -1,7 +1,6 @@
 package com.eburg_soft.mynews.presentation.newslist
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
@@ -15,8 +14,7 @@ import javax.inject.Inject
 
 class NewsListViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
 
-    private var _newsList = MutableLiveData<PagedList<NewsArticleUI>>()
-    var newsList: LiveData<PagedList<NewsArticleUI>> = LiveData<PagedList<NewsArticleUI>>()
+    private var newsList: LiveData<PagedList<NewsArticleUI>>? = null
 
     init {
         val config = PagedList.Config.Builder()
@@ -26,6 +24,8 @@ class NewsListViewModel @Inject constructor(private val repository: NewsReposito
 
         getTopHeadlinesInTheUs(config)
     }
+
+    fun getNewsList(): LiveData<PagedList<NewsArticleUI>>? = newsList
 
     private fun getTopHeadlinesInTheUs(config: PagedList.Config) {
         viewModelScope.launch {
