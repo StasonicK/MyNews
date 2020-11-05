@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/NewsArticleItem.View"
+    android:layout_marginBottom="@dimen/margin_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,6 +16,8 @@
             style="@style/NewsArticleItem.Author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/newsPublishedAtItem"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/holder_author" />

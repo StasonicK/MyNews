@@ -2,9 +2,9 @@
 <resources>
 
     <style name="NewsList">
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingStart">@dimen/padding_small</item>
+        <item name="android:paddingEnd">@dimen/padding_small</item>
         <item name="android:clipToPadding">false</item>
     </style>
 
@@ -12,7 +12,6 @@
     <style name="NewsArticleItem" />
 
     <style name="NewsArticleItem.View">
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
         <item name="cardBackgroundColor">@color/card_background</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="cardElevation">@dimen/card_elevation</item>
@@ -21,17 +20,18 @@
     <style name="NewsArticleItem.Author">
         <item name="android:background">@color/color_transparent</item>
         <item name="android:maxLines">1</item>
+        <item name="android:maxLength">25</item>
         <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/textview_size_small</item>
     </style>
 
     <style name="NewsArticleItem.Title">
         <item name="android:maxLines">3</item>
         <item name="android:padding">@dimen/padding_normal</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">@dimen/textview_size_normal</item>
+        <item name="android:textSize">@dimen/textview_size_header</item>
     </style>
 
     <style name="NewsArticleItem.PublishedAt">
@@ -60,16 +60,43 @@
         <item name="android:maxLines">1</item>
         <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textview_size_small</item>
     </style>
 
     <style name="NewsArticleDetailed.Title">
-        <item name="android:scaleType">centerCrop</item>
+        <item name="android:paddingStart">@dimen/padding_normal</item>
+        <item name="android:paddingEnd">@dimen/padding_normal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textview_size_header</item>
+    </style>
+
+    <style name="NewsArticleDetailed.Description">
+        <item name="android:paddingStart">@dimen/padding_normal</item>
+        <item name="android:paddingEnd">@dimen/padding_normal</item>
+        <item name="android:maxLines">18</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textview_size_header</item>
     </style>
 
     <style name="NewsArticleDetailed.PublishedAt">
-        <item name="android:scaleType">centerCrop</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/textview_size_small</item>
+    </style>
+
+    <style name="NewsArticleDetailed.OpenOriginalPage">
+        <item name="android:paddingStart">@dimen/padding_small</item>
+        <item name="android:paddingEnd">@dimen/padding_small</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@drawable/rectangle_border_black_filling_green</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/textview_size_small</item>
     </style>
     <!--endregion-->
 

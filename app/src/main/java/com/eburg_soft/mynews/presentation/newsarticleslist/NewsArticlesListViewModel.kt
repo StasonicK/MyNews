@@ -31,7 +31,7 @@ class NewsArticlesListViewModel @Inject constructor(private val repository: News
         viewModelScope.launch {
             val dataSourceFactory = object : DataSource.Factory<Int, NewsArticleUI>() {
                 override fun create(): DataSource<Int, NewsArticleUI> {
-                    return NewsDataSource(repository)
+                    return NewsArticlesPositionalDataSource(repository)
                 }
             }
             newsList = LivePagedListBuilder(dataSourceFactory, config).build()

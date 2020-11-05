@@ -13,7 +13,7 @@ import timber.log.Timber
 import java.math.RoundingMode.CEILING
 import javax.inject.Inject
 
-class NewsDataSource @Inject constructor(private val repository: NewsRepository) :
+class NewsArticlesPositionalDataSource @Inject constructor(private val repository: NewsRepository) :
     PageKeyedDataSource<Int, NewsArticleUI>() {
 
     private val job = Job()

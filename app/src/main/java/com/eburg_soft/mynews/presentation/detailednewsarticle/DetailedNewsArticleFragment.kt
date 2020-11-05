@@ -10,18 +10,84 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
+import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.buttonOpenOriginalPage
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewAuthor
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewDescription
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewPublishedAt
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewTitle
 import timber.log.Timber
 
 class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_article) {
+
     private lateinit var toolbar: Toolbar
+    private var factory: CustomViewModelFactory? = null
+
+    private lateinit var item: NewsArticleUI
 
     companion object {
+
+        const val AUTHOR = "author"
+        const val TITLE = "Title"
+        const val DESCRIPTION = "Description"
+        const val PUBLISHED_AT = "PublishedAt"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        retainInstance = true
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        getItem()
         setupUI()
+
+        Timber.d("onActivityCreated()")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+//        outState.putString()
+//        outState.putString()
+//        outState.putString()
+//        outState.put()
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun getItem() {
+        item = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
+    }
+
+    private fun setupUI() {
+        toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
+        toolbar.apply {
+            setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
+            setNavigationOnClickListener {
+                Navigation.findNavController(requireView()).navigateUp()
+            }
+        }
+
+        textViewAuthor.text = item.author
+        textViewTitle.text = item.title
+        textViewDescription.text = item.description
+        textViewPublishedAt.text = item.publishedAt
+
+        Picasso.get()
+            .load(item.urlToImage)
+            .fit()
+            .centerCrop()
+            .placeholder(R.drawable.image_placeholder)
+            .into(imageViewNews)
+
+        // TODO: 05.11.2020 finish
+        buttonOpenOriginalPage.setOnClickListener {
+
+        }
+
         // handle back button
         requireActivity().onBackPressedDispatcher.addCallback(
             requireActivity(),
@@ -36,17 +102,6 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
                 }
             }
         )
-        Timber.d("onActivityCreated()")
-    }
-
-    private fun setupUI() {
-        toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
-        toolbar.apply {
-            setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
-            setNavigationOnClickListener {
-                Navigation.findNavController(requireView()).navigateUp()
-            }
-        }
     }
 
     override fun onCreateView(
@@ -56,7 +111,6 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detailed_news_article, container, false)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

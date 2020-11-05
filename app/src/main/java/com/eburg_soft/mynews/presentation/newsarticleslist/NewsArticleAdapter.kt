@@ -2,15 +2,16 @@ package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.inflate
 import com.eburg_soft.mynews.presentation.models.NewsArticleUI
 import com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
-import kotlinx.android.synthetic.main.item_news.view.newsAuthorItem
-import kotlinx.android.synthetic.main.item_news.view.newsPublishedAtItem
-import kotlinx.android.synthetic.main.item_news.view.newsTitleItem
+import kotlinx.android.synthetic.main.item_news_article.view.newsAuthorItem
+import kotlinx.android.synthetic.main.item_news_article.view.newsPublishedAtItem
+import kotlinx.android.synthetic.main.item_news_article.view.newsTitleItem
 
 class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
 
@@ -21,9 +22,16 @@ class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(Ne
         private val publishedAt = itemView.newsPublishedAtItem
 
         fun bind(item: NewsArticleUI?) {
-            author.text = item?.author
-            title.text = item?.title
-            publishedAt.text = item?.publishedAt
+            item?.let {
+                author.text = item.author ?: "Anonymous author"
+                title.text = item.title
+                publishedAt.text = item.publishedAt
+
+                itemView.setOnClickListener {
+                    val direction = NewsArticlesListFragmentDirections.openDetailedNewsArticleFragment(item)
+                    Navigation.findNavController(itemView).navigate(direction)
+                }
+            }
         }
     }
 

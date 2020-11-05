@@ -29,7 +29,7 @@
         style="@style/NewsArticleDetailed.Author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Anonymous author"
+        android:text="@string/holder_author"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewNews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -37,42 +37,45 @@
 
     <TextView
         android:id="@+id/textViewTitle"
+        style="@style/NewsArticleDetailed.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal"
-        android:text="Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewNews" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewNews"
+        tools:text="@string/holder_title" />
 
     <TextView
         android:id="@+id/textViewDescription"
+        style="@style/NewsArticleDetailed.Description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        tools:text="@string/holder_description" />
 
     <TextView
         android:id="@+id/textViewPublishedAt"
+        style="@style/NewsArticleDetailed.PublishedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginEnd="@dimen/margin_normal"
-        android:text="01.01.2021"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+        tools:text="01.01.2021" />
 
     <Button
         android:id="@+id/buttonOpenOriginalPage"
+        style="@style/NewsArticleDetailed.OpenOriginalPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_marginBottom="@dimen/margin_normal"
+        android:text="@string/button_open_original_page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

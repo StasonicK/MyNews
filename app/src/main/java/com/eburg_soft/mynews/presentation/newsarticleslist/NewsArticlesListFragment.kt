@@ -1,6 +1,7 @@
 package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,16 +10,17 @@ import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
 import com.eburg_soft.mynews.presentation.models.NewsArticleUI
-import kotlinx.android.synthetic.main.fragment_news_list.recyclerview_news
+import kotlinx.android.synthetic.main.fragment_news_articles_list.recyclerviewNewsArticles
 import timber.log.Timber
 
 class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list) {
 
+    private lateinit var toolbar: Toolbar
     private var savedInstanceState: Bundle? = null
     private val newsArticleAdapter = NewsArticleAdapter()
 
-    private val mViewModelArticles: NewsArticlesListViewModel by lazy {
-        injectViewModel(NewsArticlesListViewModel::class, Scopes.NewsList)
+    private val viewModel: NewsArticlesListViewModel by lazy {
+        injectViewModel(NewsArticlesListViewModel::class, Scopes.newsArticlesList)
     }
 
     companion object {
@@ -26,15 +28,24 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         private const val KEY_LAST_ITEM_POSITION = "KEY_LAST_ITEM_POSITION"
     }
 
-    //region ====================== Android methods ======================
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        retainInstance = true
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         this.savedInstanceState = savedInstanceState
 
+        setupUI()
         observerLiveData()
         Timber.d("onActivityCreated()")
+    }
+
+    private fun setupUI() {
+        toolbar = activity?.findViewById(R.id.toolbarNewsArticlesListFragment)!!
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -45,7 +56,7 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
     //endregion
 
     private fun observerLiveData() {
-        observe(mViewModelArticles.getNewsList()) { showNewsList(it) }
+        observe(viewModel.getNewsList()) { showNewsList(it) }
     }
 
     private fun showNewsList(news: PagedList<NewsArticleUI>) {
@@ -57,13 +68,13 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
     private fun restorePreviousUIState() {
         savedInstanceState?.let {
             val lastItemPosition = it.getInt(KEY_LAST_ITEM_POSITION)
-            recyclerview_news.scrollToPosition(lastItemPosition)
+            recyclerviewNewsArticles.scrollToPosition(lastItemPosition)
             Timber.d("$KEY_LAST_ITEM_POSITION is $lastItemPosition")
         }
     }
 
     private fun populateNewsList(news: PagedList<NewsArticleUI>) {
-        recyclerview_news.apply {
+        recyclerviewNewsArticles.apply {
             newsArticleAdapter.submitList(news)
             adapter = newsArticleAdapter
             setHasFixedSize(true)
@@ -71,7 +82,7 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
     }
 
     private fun saveRecyclerViewState(outState: Bundle) {
-        recyclerview_news.apply {
+        recyclerviewNewsArticles.apply {
             layoutManager?.let { it ->
                 val lastVisibleItemPosition = (it as LinearLayoutManager).findLastVisibleItemPosition()
 
