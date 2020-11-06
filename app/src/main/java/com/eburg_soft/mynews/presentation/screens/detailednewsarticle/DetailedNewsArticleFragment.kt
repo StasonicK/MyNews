@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
-import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.buttonOpenOriginalPage
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
@@ -23,17 +23,8 @@ import timber.log.Timber
 class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_article) {
 
     private lateinit var toolbar: Toolbar
-    private var factory: CustomViewModelFactory? = null
 
-    private lateinit var item: NewsArticleUI
-
-    companion object {
-
-        const val AUTHOR = "author"
-        const val TITLE = "Title"
-        const val DESCRIPTION = "Description"
-        const val PUBLISHED_AT = "PublishedAt"
-    }
+    private lateinit var mItem: NewsArticleUi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,34 +41,27 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
         Timber.d("onActivityCreated()")
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-//        outState.putString()
-//        outState.putString()
-//        outState.putString()
-//        outState.put()
-        super.onSaveInstanceState(outState)
-    }
-
     private fun getItem() {
-        item = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
+        mItem = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
     }
 
     private fun setupUI() {
         toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
         toolbar.apply {
+            setTitle(R.string.app_name)
             setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
             setNavigationOnClickListener {
                 Navigation.findNavController(requireView()).navigateUp()
             }
         }
 
-        textViewAuthor.text = item.author
-        textViewTitle.text = item.title
-        textViewDescription.text = item.description
-        textViewPublishedAt.text = item.publishedAt
+        textViewAuthor.text = mItem.author
+        textViewTitle.text = mItem.title
+        textViewDescription.text = mItem.description
+        textViewPublishedAt.text = mItem.publishedAt
 
         Picasso.get()
-            .load(item.urlToImage)
+            .load(mItem.urlToImage)
             .fit()
             .centerCrop()
             .placeholder(R.drawable.image_placeholder)

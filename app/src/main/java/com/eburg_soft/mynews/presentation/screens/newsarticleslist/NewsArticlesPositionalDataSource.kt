@@ -4,7 +4,7 @@ import androidx.paging.PageKeyedDataSource
 import com.eburg_soft.mynews.core.PAGE_SIZE
 import com.eburg_soft.mynews.data.repository.NewsRepository
 import com.eburg_soft.mynews.extensions.round
-import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -14,7 +14,7 @@ import java.math.RoundingMode.CEILING
 import javax.inject.Inject
 
 class NewsArticlesPositionalDataSource @Inject constructor(private val repository: NewsRepository) :
-    PageKeyedDataSource<Int, NewsArticleUI>() {
+    PageKeyedDataSource<Int, NewsArticleUi>() {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
@@ -26,7 +26,7 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
         var size = 0
     }
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, NewsArticleUI>) {
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, NewsArticleUi>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
             val data = repository.getTopHeadlinesInTheUsForUI()
@@ -48,10 +48,10 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUI>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUi>) {
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUI>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUi>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
             val data = repository.getTopHeadlinesInTheUsForUI(pageNumber = currentPage)

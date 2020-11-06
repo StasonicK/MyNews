@@ -7,13 +7,13 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.inflate
-import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
 import kotlinx.android.synthetic.main.item_news_article.view.newsAuthorItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsPublishedAtItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsTitleItem
 
-class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
+class NewsArticleAdapter : PagedListAdapter<NewsArticleUi, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
 
     class NewsArticleHolder(view: View) : ViewHolder(view) {
 
@@ -21,7 +21,7 @@ class NewsArticleAdapter : PagedListAdapter<NewsArticleUI, NewsArticleHolder>(Ne
         private val title = itemView.newsTitleItem
         private val publishedAt = itemView.newsPublishedAtItem
 
-        fun bind(item: NewsArticleUI?) {
+        fun bind(item: NewsArticleUi?) {
             item?.let {
                 author.text = item.author ?: "Anonymous author"
                 title.text = item.title

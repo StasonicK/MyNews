@@ -1,6 +1,8 @@
 package com.eburg_soft.mynews.presentation.newsarticleslist
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
@@ -9,7 +11,8 @@ import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
-import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.eburg_soft.mynews.presentation.models.NewsArticleUi
+import kotlinx.android.synthetic.main.fragment_news_articles_list.progressbarNewsArticlesListFragment
 import kotlinx.android.synthetic.main.fragment_news_articles_list.recyclerviewNewsArticles
 import timber.log.Timber
 
@@ -28,12 +31,6 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         private const val KEY_LAST_ITEM_POSITION = "KEY_LAST_ITEM_POSITION"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        retainInstance = true
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -44,8 +41,10 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         Timber.d("onActivityCreated()")
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setupUI() {
         toolbar = activity?.findViewById(R.id.toolbarNewsArticlesListFragment)!!
+        toolbar.setTitle(R.string.app_name)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -56,10 +55,11 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
     //endregion
 
     private fun observerLiveData() {
+        observe(viewModel.isLoadingLiveData) { showLoading(it) }
         observe(viewModel.getNewsList()) { showNewsList(it) }
     }
 
-    private fun showNewsList(news: PagedList<NewsArticleUI>) {
+    private fun showNewsList(news: PagedList<NewsArticleUi>) {
         populateNewsList(news)
         restorePreviousUIState()
     }
@@ -73,11 +73,17 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         }
     }
 
-    private fun populateNewsList(news: PagedList<NewsArticleUI>) {
+    private fun populateNewsList(news: PagedList<NewsArticleUi>) {
         recyclerviewNewsArticles.apply {
             newsArticleAdapter.submitList(news)
             adapter = newsArticleAdapter
             setHasFixedSize(true)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        progressbarNewsArticlesListFragment.apply {
+            visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 

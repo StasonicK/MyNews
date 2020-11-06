@@ -1,6 +1,6 @@
 package com.eburg_soft.mynews.data.datasource.network
 
-import com.eburg_soft.mynews.core.BASE_URL
+import com.eburg_soft.mynews.core.NEWS_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -28,7 +28,7 @@ object NewsApiService {
             .create()
 
     private fun retrofitInstance(): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(NEWS_URL)
         .client(okHttpInstance())
         .addConverterFactory(GsonConverterFactory.create(gsonInstance()))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
