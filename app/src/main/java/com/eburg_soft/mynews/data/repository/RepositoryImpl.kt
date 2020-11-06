@@ -8,17 +8,17 @@ import com.eburg_soft.mynews.presentation.models.IpUi
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import javax.inject.Inject
 
-class NewsRepositoryImpl @Inject constructor(
+class RepositoryImpl @Inject constructor(
     private val newsApi: NewsApi,
     private val ipApi: IpApi
-) : NewsRepository {
+) : Repository {
 
     private val newsArticleResponseToUiMapper = NewsArticleResponseToUiMapper()
     private val ipToUiMapper = IpToUiMapper()
 
     // fetch news from API  and map data for UI
-    override suspend fun getTopHeadlinesInTheUsForUI(pageNumber: Int): Pair<ArrayList<NewsArticleUi>, Int> {
-        val response = newsApi.getTopHeadlinesInTheUs(pageNumber = pageNumber)
+    override suspend fun getNewsArticlesFromApi(pageNumber: Int): Pair<ArrayList<NewsArticleUi>, Int> {
+        val response = newsApi.getNewsArticlesFromApi(pageNumber = pageNumber)
         val size = response?.totalResults ?: 0
         val list: ArrayList<NewsArticleUi> = arrayListOf()
         response.let { response1 ->
@@ -32,8 +32,8 @@ class NewsRepositoryImpl @Inject constructor(
         return list to size
     }
 
-    override suspend fun getIpDetails(ip: String): IpUi {
-        val response = ipApi.getIpDetails(ip)
+    override suspend fun getIpDetailsFromApi(ip: String): IpUi {
+        val response = ipApi.getIpDetailsFromApi(ip)
         return ipToUiMapper.map(response)
     }
 }

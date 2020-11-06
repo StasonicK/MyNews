@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.data.datasource.network
+package com.eburg_soft.mynews.data.datasource.network.apis
 
 import com.eburg_soft.mynews.core.NEWS_API_KEY
 import com.eburg_soft.mynews.core.PAGE_SIZE
@@ -11,7 +11,7 @@ import retrofit2.http.Query
  *
  * Read the documentation [here](https://newsapi.org/docs/v2)
  */
-interface NewsApi {
+interface NewsApi : BaseApi {
 
     /**
      * Get top headlines.
@@ -20,7 +20,7 @@ interface NewsApi {
      * Sample: https://newsapi.org/v2/top-headlines?country=us&apiKey=1f9f0f56fac04cc886b6e6a2f1ed8e0e&pageSize=20&page=2
      */
     @GET("v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}")
-    suspend fun getTopHeadlinesInTheUs(
+    suspend fun getNewsArticlesFromApi(
         @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("page") pageNumber: Int = 1
     ): NewsResponse?

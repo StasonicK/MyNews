@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,13 +8,13 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.eburg_soft.mynews.core.PAGE_SIZE
-import com.eburg_soft.mynews.data.repository.NewsRepository
+import com.eburg_soft.mynews.data.repository.Repository
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsArticlesListViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
+class NewsArticlesListViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private var mNewsList: LiveData<PagedList<NewsArticleUi>>? = null
 
@@ -45,8 +45,8 @@ class NewsArticlesListViewModel @Inject constructor(private val repository: News
             }
             mNewsList = LivePagedListBuilder(dataSourceFactory, config).build()
 
-            // show progressbar during 1000 milliseconds
-            delay(1000)
+            // show progressbar during 500 milliseconds
+            delay(500)
             // hide progressbar
             isLoadingMutableLiveData.value = false
         }

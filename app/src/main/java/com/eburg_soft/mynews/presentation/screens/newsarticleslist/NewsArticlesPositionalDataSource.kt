@@ -1,8 +1,8 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import androidx.paging.PageKeyedDataSource
 import com.eburg_soft.mynews.core.PAGE_SIZE
-import com.eburg_soft.mynews.data.repository.NewsRepository
+import com.eburg_soft.mynews.data.repository.Repository
 import com.eburg_soft.mynews.extensions.round
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +13,7 @@ import timber.log.Timber
 import java.math.RoundingMode.CEILING
 import javax.inject.Inject
 
-class NewsArticlesPositionalDataSource @Inject constructor(private val repository: NewsRepository) :
+class NewsArticlesPositionalDataSource @Inject constructor(private val repository: Repository) :
     PageKeyedDataSource<Int, NewsArticleUi>() {
 
     private val job = Job()
@@ -29,7 +29,7 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, NewsArticleUi>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
-            val data = repository.getTopHeadlinesInTheUsForUI()
+            val data = repository.getNewsArticlesFromApi()
             size = data.second
             Timber.d("size = $size")
             if (isNextPageNumber(data.second, PAGE_SIZE, currentPage)) {
@@ -54,7 +54,7 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUi>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
-            val data = repository.getTopHeadlinesInTheUsForUI(pageNumber = currentPage)
+            val data = repository.getNewsArticlesFromApi(pageNumber = currentPage)
             if (isNextPageNumber(size, PAGE_SIZE, currentPage)) {
                 callback.onResult(data.first, nextPage)
                 Timber.d("nextPage = $nextPage")

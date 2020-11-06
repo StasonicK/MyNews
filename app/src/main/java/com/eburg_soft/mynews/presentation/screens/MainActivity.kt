@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation
+package com.eburg_soft.mynews.presentation.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

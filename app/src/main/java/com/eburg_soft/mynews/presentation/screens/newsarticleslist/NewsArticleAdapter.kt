@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.inflate
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
-import com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
+import com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticlesListFragmentDirections
+import com.eburg_soft.mynews.presentation.screens.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
 import kotlinx.android.synthetic.main.item_news_article.view.newsAuthorItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsPublishedAtItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsTitleItem

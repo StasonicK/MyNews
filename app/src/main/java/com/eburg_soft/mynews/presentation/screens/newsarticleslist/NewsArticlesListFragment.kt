@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
