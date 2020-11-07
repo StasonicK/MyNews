@@ -2,7 +2,6 @@ package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R

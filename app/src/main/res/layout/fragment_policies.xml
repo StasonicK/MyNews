@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentPolicies"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".presentation.screens.policies.PoliciesFragment">
+        tools:context=".presentation.policies.PoliciesFragment">
 
         <include
             android:id="@+id/toolbarPoliciesFragment"
@@ -34,7 +35,15 @@
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textviewCountryCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="US" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +60,7 @@
                 android:text="@string/agree" />
 
             <TextView
-                android:id="@+id/textviewIP"
+                android:id="@+id/textviewLanguageCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"

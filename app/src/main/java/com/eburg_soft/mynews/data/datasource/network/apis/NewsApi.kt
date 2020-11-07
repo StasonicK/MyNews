@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * Describes endpoints to fetch the news from "News API".
+ * Describes endpoints to fetch the news from 'News API'.
  *
  * Read the documentation [here](https://newsapi.org/docs/v2)
  */
