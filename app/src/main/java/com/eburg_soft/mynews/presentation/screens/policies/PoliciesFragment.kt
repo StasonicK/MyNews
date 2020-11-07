@@ -41,6 +41,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
         observerLiveData()
         setupUI()
+
         Timber.d("onActivityCreated()")
     }
 

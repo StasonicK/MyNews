@@ -2,6 +2,10 @@
     <!-- App details -->
     <string name="app_name">My News</string>
 
+    <!-- Services' ids -->
+    <string name="facebook_app_id">1241659876206696</string>
+    <string name="ad_mob_id">ca-app-pub-8721640890137447~6974411815</string>
+
     <!-- Content Description -->
     <string name="news_image_desc">News Image</string>
     <string name="news_image">news image</string>
