@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
+import com.google.android.gms.ads.AdRequest
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.buttonOpenOriginalPage
+import kotlinx.android.synthetic.main.fragment_detailed_news_article.adView
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewAuthor
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewDescription
@@ -42,7 +43,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
     }
 
     private fun getItem() {
-//        newsArticleUiModel = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
+        newsArticleUiModel = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
     }
 
     private fun setupUI() {
@@ -67,11 +68,6 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             .placeholder(R.drawable.image_placeholder)
             .into(imageViewNews)
 
-        // TODO: 05.11.2020 finish
-        buttonOpenOriginalPage.setOnClickListener {
-
-        }
-
         // handle back button
         requireActivity().onBackPressedDispatcher.addCallback(
             requireActivity(),
@@ -86,6 +82,10 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
                 }
             }
         )
+
+        // launch advertisement banner
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     override fun onCreateView(
