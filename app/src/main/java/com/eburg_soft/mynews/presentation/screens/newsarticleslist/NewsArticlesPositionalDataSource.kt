@@ -1,10 +1,10 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import androidx.paging.PageKeyedDataSource
 import com.eburg_soft.mynews.core.PAGE_SIZE
-import com.eburg_soft.mynews.data.repository.NewsRepository
+import com.eburg_soft.mynews.data.repository.Repository
 import com.eburg_soft.mynews.extensions.round
-import com.eburg_soft.mynews.presentation.models.NewsArticleUI
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,8 +13,8 @@ import timber.log.Timber
 import java.math.RoundingMode.CEILING
 import javax.inject.Inject
 
-class NewsArticlesPositionalDataSource @Inject constructor(private val repository: NewsRepository) :
-    PageKeyedDataSource<Int, NewsArticleUI>() {
+class NewsArticlesPositionalDataSource @Inject constructor(private val repository: Repository) :
+    PageKeyedDataSource<Int, NewsArticleUiModel>() {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
@@ -26,10 +26,10 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
         var size = 0
     }
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, NewsArticleUI>) {
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, NewsArticleUiModel>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
-            val data = repository.getTopHeadlinesInTheUsForUI()
+            val data = repository.getNewsArticlesFromApi()
             size = data.second
             Timber.d("size = $size")
             if (isNextPageNumber(data.second, PAGE_SIZE, currentPage)) {
@@ -48,13 +48,13 @@ class NewsArticlesPositionalDataSource @Inject constructor(private val repositor
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUI>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUiModel>) {
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUI>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsArticleUiModel>) {
         scope.launch {
             Timber.d("currentPage = $currentPage")
-            val data = repository.getTopHeadlinesInTheUsForUI(pageNumber = currentPage)
+            val data = repository.getNewsArticlesFromApi(pageNumber = currentPage)
             if (isNextPageNumber(size, PAGE_SIZE, currentPage)) {
                 callback.onResult(data.first, nextPage)
                 Timber.d("nextPage = $nextPage")

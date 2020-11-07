@@ -1,13 +1,13 @@
 package com.eburg_soft.mynews.data.di
 
-import com.eburg_soft.mynews.data.repository.NewsRepository
-import com.eburg_soft.mynews.data.repository.NewsRepositoryImpl
+import com.eburg_soft.mynews.data.repository.Repository
+import com.eburg_soft.mynews.data.repository.RepositoryImpl
 import toothpick.config.Module
 
 class RepositoryModule : Module() {
 
     init {
-        bind(NewsRepository::class.java)
-            .to(NewsRepositoryImpl::class.java)
+        bind(Repository::class.java)
+            .to(RepositoryImpl::class.java)
     }
 }

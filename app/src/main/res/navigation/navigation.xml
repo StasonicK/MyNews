@@ -3,11 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/newsArticlesListFragment">
+    app:startDestination="@id/policiesFragment">
+
+    <fragment
+        android:id="@+id/policiesFragment"
+        android:name="com.eburg_soft.mynews.presentation.screens.policies.PoliciesFragment"
+        android:label="FragmentPolicies">
+        <action
+            android:id="@+id/openNewsArticlesListFragment"
+            app:destination="@id/newsArticlesListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/newsArticlesListFragment"
-        android:name="com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticlesListFragment"
+        android:name="com.eburg_soft.mynews.presentation.screens.newsarticleslist.NewsArticlesListFragment"
         android:label="FragmentNewsArticlesList"
         tools:layout="@layout/fragment_news_articles_list">
         <action
@@ -17,12 +26,11 @@
 
     <fragment
         android:id="@+id/detailedNewsArticleFragment"
-        android:name="com.eburg_soft.mynews.presentation.detailednewsarticle.DetailedNewsArticleFragment"
+        android:name="com.eburg_soft.mynews.presentation.screens.detailednewsarticle.DetailedNewsArticleFragment"
         android:label="FragmentDetailedNewsArticle"
-        tools:layout="@layout/fragment_detailed_news_article"
-        >
+        tools:layout="@layout/fragment_detailed_news_article">
         <argument
             android:name="url"
-            app:argType="com.eburg_soft.mynews.presentation.models.NewsArticleUI" />
+            app:argType="com.eburg_soft.mynews.presentation.models.NewsArticleUiModel" />
     </fragment>
 </navigation>

@@ -4,5 +4,5 @@ object Scopes {
 
     const val app = "scope.app"
     const val newsArticlesList = "scope.newsArticlesList"
-    const val detailedNewsArticle = "scope.detailedNewsArticle"
+    const val policies = "scope.policies"
 }
