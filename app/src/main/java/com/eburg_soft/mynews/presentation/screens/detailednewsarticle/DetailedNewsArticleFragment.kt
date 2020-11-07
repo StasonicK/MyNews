@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.detailednewsarticle
+package com.eburg_soft.mynews.presentation.screens.detailednewsarticle
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
-import com.eburg_soft.mynews.presentation.models.NewsArticleUi
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.buttonOpenOriginalPage
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
@@ -24,7 +24,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
 
     private lateinit var toolbar: Toolbar
 
-    private lateinit var mItem: NewsArticleUi
+    private lateinit var newsArticleUiModel: NewsArticleUiModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
     }
 
     private fun getItem() {
-//        mItem = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
+//        newsArticleUiModel = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
     }
 
     private fun setupUI() {
@@ -55,13 +55,13 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             }
         }
 
-        textViewAuthor.text = mItem.author
-        textViewTitle.text = mItem.title
-        textViewDescription.text = mItem.description
-        textViewPublishedAt.text = mItem.publishedAt
+        textViewAuthor.text = newsArticleUiModel.author
+        textViewTitle.text = newsArticleUiModel.title
+        textViewDescription.text = newsArticleUiModel.description
+        textViewPublishedAt.text = newsArticleUiModel.publishedAt
 
         Picasso.get()
-            .load(mItem.urlToImage)
+            .load(newsArticleUiModel.urlToImage)
             .fit()
             .centerCrop()
             .placeholder(R.drawable.image_placeholder)

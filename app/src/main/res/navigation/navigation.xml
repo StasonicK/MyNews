@@ -31,6 +31,6 @@
         tools:layout="@layout/fragment_detailed_news_article">
         <argument
             android:name="url"
-            app:argType="com.eburg_soft.mynews.presentation.models.NewsArticleUI" />
+            app:argType="com.eburg_soft.mynews.presentation.models.NewsArticleUiModel" />
     </fragment>
 </navigation>

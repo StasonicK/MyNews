@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class NewsArticleUi(
+data class NewsArticleUiModel(
     /**
      * Name of the author for the article
      */

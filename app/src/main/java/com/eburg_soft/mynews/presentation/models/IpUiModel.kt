@@ -1,6 +1,6 @@
 package com.eburg_soft.mynews.presentation.models
 
-data class IpUi(
+data class IpUiModel(
     var countryCode: String? = null
 ) {
 }

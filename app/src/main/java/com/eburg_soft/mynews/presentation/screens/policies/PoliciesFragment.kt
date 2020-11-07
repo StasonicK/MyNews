@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.policies
+package com.eburg_soft.mynews.presentation.screens.policies
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,10 +14,10 @@ import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
 import com.eburg_soft.mynews.utils.NetworkUtils
-import kotlinx.android.synthetic.main.fragment_policies.textviewIP
 import kotlinx.android.synthetic.main.fragment_policies.buttonAgree
 import kotlinx.android.synthetic.main.fragment_policies.buttonDeny
 import kotlinx.android.synthetic.main.fragment_policies.progressbarPoliciesFragment
+import kotlinx.android.synthetic.main.fragment_policies.textviewIP
 import kotlinx.android.synthetic.main.fragment_policies.webView
 import timber.log.Timber
 import java.util.Locale
@@ -51,8 +51,9 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupUI() {
         showLoading(true)
-
-        ipAddress = NetworkUtils.detectNetwork(requireContext())
+        val ipAddressAndIsIPv4 = NetworkUtils.detectNetwork(requireContext())
+        ipAddress = ipAddressAndIsIPv4?.first
+        val isIPv4 = ipAddressAndIsIPv4?.second
 
         toolbar = activity?.findViewById(R.id.toolbarPoliciesFragment)!!
         toolbar.setTitle(R.string.app_name)

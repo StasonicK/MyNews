@@ -11,7 +11,7 @@ import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
-import com.eburg_soft.mynews.presentation.models.NewsArticleUi
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import kotlinx.android.synthetic.main.fragment_news_articles_list.progressbarNewsArticlesListFragment
 import kotlinx.android.synthetic.main.fragment_news_articles_list.recyclerviewNewsArticles
 import timber.log.Timber
@@ -59,8 +59,8 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         observe(viewModel.getNewsList()) { showNewsList(it) }
     }
 
-    private fun showNewsList(news: PagedList<NewsArticleUi>) {
-        populateNewsList(news)
+    private fun showNewsList(newsModels: PagedList<NewsArticleUiModel>) {
+        populateNewsList(newsModels)
         restorePreviousUIState()
     }
 
@@ -73,9 +73,9 @@ class NewsArticlesListFragment() : Fragment(R.layout.fragment_news_articles_list
         }
     }
 
-    private fun populateNewsList(news: PagedList<NewsArticleUi>) {
+    private fun populateNewsList(newsModels: PagedList<NewsArticleUiModel>) {
         recyclerviewNewsArticles.apply {
-            newsArticleAdapter.submitList(news)
+            newsArticleAdapter.submitList(newsModels)
             adapter = newsArticleAdapter
             setHasFixedSize(true)
         }

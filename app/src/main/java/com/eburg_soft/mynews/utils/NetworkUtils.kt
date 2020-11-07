@@ -13,7 +13,7 @@ import java.util.Enumeration
 object NetworkUtils {
 
     //Check the internet connection.
-    fun detectNetwork(context: Context): String? {
+    fun detectNetwork(context: Context): Pair<String?, Boolean>? {
         var isWifiConnection = false
         var isMobileConnection = false
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -24,15 +24,15 @@ object NetworkUtils {
                 true
         }
 
-        var ipAddress: String? = null
+        var ipAddressAndIsIPv4: Pair<String?, Boolean>? = null
         if (isWifiConnection) {
-            ipAddress = getDeviceIpWiFiData(context)
+            ipAddressAndIsIPv4 = getDeviceIpWiFiData(context) to true
         }
 
         if (isMobileConnection) {
-            ipAddress = getDeviceIpMobileData()
+            ipAddressAndIsIPv4 = getDeviceIpMobileData() to false
         }
-        return ipAddress
+        return ipAddressAndIsIPv4
     }
 
     private fun getDeviceIpMobileData(): String? {
@@ -40,13 +40,21 @@ object NetworkUtils {
             val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
             while (en.hasMoreElements()) {
                 val networkinterface: NetworkInterface = en.nextElement()
+                Timber.d("networkinterface: $networkinterface")
                 val enumIpAddr: Enumeration<InetAddress> = networkinterface.inetAddresses
+                Timber.d("enumIpAddr: $enumIpAddr")
                 while (enumIpAddr.hasMoreElements()) {
                     val inetAddress: InetAddress = enumIpAddr.nextElement()
+                    Timber.d("inetAddress: $inetAddress")
                     if (!inetAddress.isLoopbackAddress) {
-                        val mobileIpAddress = inetAddress.hostAddress.toString()
+                        val mobileIpAddressWithName = inetAddress.hostAddress.toString()
+                        val mobileIpAddress =
+                            mobileIpAddressWithName.substring(0, mobileIpAddressWithName.indexOf("%") - 1)
+//                        val mobileIpAddress = inetAddress.address.toString()
                         Timber.d("mobileIpAddress: $mobileIpAddress")
-                        return mobileIpAddress
+                        val mobileIpAddressReversed = StringBuilder(mobileIpAddress).reverse().toString()
+                        Timber.d("mobileIpAddressReversed: $mobileIpAddressReversed")
+                        return mobileIpAddressWithName
                     }
                 }
             }

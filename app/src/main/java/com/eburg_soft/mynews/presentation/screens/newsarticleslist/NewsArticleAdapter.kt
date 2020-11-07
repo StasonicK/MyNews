@@ -1,18 +1,19 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.inflate
-import com.eburg_soft.mynews.presentation.models.NewsArticleUi
-import com.eburg_soft.mynews.presentation.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
+import com.eburg_soft.mynews.presentation.screens.newsarticleslist.NewsArticleAdapter.NewsArticleHolder
 import kotlinx.android.synthetic.main.item_news_article.view.newsAuthorItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsPublishedAtItem
 import kotlinx.android.synthetic.main.item_news_article.view.newsTitleItem
 
-class NewsArticleAdapter : PagedListAdapter<NewsArticleUi, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
+class NewsArticleAdapter : PagedListAdapter<NewsArticleUiModel, NewsArticleHolder>(NewsArticleDiffUtilCallback()) {
 
     class NewsArticleHolder(view: View) : ViewHolder(view) {
 
@@ -20,7 +21,7 @@ class NewsArticleAdapter : PagedListAdapter<NewsArticleUi, NewsArticleHolder>(Ne
         private val title = itemView.newsTitleItem
         private val publishedAt = itemView.newsPublishedAtItem
 
-        fun bind(item: NewsArticleUi?) {
+        fun bind(item: NewsArticleUiModel?) {
             item?.let {
                 author.text = item.author ?: "Anonymous author"
                 title.text = item.title

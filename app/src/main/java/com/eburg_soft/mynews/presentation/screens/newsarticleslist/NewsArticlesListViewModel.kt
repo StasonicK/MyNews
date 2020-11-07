@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.newsarticleslist
+package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,14 +9,14 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.eburg_soft.mynews.core.PAGE_SIZE
 import com.eburg_soft.mynews.data.repository.Repository
-import com.eburg_soft.mynews.presentation.models.NewsArticleUi
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NewsArticlesListViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private var mNewsList: LiveData<PagedList<NewsArticleUi>>? = null
+    private var mNewsListModel: LiveData<PagedList<NewsArticleUiModel>>? = null
 
     private val isLoadingMutableLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> get() = isLoadingMutableLiveData
@@ -31,19 +31,19 @@ class NewsArticlesListViewModel @Inject constructor(private val repository: Repo
         getTopHeadlinesInTheUs(config)
     }
 
-    fun getNewsList(): LiveData<PagedList<NewsArticleUi>>? = mNewsList
+    fun getNewsList(): LiveData<PagedList<NewsArticleUiModel>>? = mNewsListModel
 
     private fun getTopHeadlinesInTheUs(config: PagedList.Config) {
         viewModelScope.launch {
             // show progressbar
             isLoadingMutableLiveData.value = true
 
-            val dataSourceFactory = object : DataSource.Factory<Int, NewsArticleUi>() {
-                override fun create(): DataSource<Int, NewsArticleUi> {
+            val dataSourceFactory = object : DataSource.Factory<Int, NewsArticleUiModel>() {
+                override fun create(): DataSource<Int, NewsArticleUiModel> {
                     return NewsArticlesPositionalDataSource(repository)
                 }
             }
-            mNewsList = LivePagedListBuilder(dataSourceFactory, config).build()
+            mNewsListModel = LivePagedListBuilder(dataSourceFactory, config).build()
 
             // show progressbar during 500 milliseconds
             delay(500)

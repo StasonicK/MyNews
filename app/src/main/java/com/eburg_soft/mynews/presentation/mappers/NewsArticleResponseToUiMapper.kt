@@ -3,12 +3,12 @@ package com.eburg_soft.mynews.presentation.mappers
 import android.annotation.SuppressLint
 import com.eburg_soft.mynews.core.BaseMapper
 import com.eburg_soft.mynews.data.datasource.network.models.NewsArticleResponse
-import com.eburg_soft.mynews.presentation.models.NewsArticleUi
+import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class NewsArticleResponseToUiMapper : BaseMapper<NewsArticleResponse, NewsArticleUi> {
+class NewsArticleResponseToUiMapper : BaseMapper<NewsArticleResponse, NewsArticleUiModel> {
 
     companion object {
 
@@ -21,8 +21,8 @@ class NewsArticleResponseToUiMapper : BaseMapper<NewsArticleResponse, NewsArticl
         const val resultDatePattern = "dd.MM.yyyy"
     }
 
-    override fun map(type: NewsArticleResponse?): NewsArticleUi {
-        val newsArticleUI = NewsArticleUi()
+    override fun map(type: NewsArticleResponse?): NewsArticleUiModel {
+        val newsArticleUI = NewsArticleUiModel()
         type.let {
             it?.apply {
                 if (author.isNullOrBlank()) {
