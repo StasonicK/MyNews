@@ -1,6 +1,10 @@
 package com.eburg_soft.mynews.presentation.screens
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -11,6 +15,8 @@ import com.eburg_soft.mynews.extensions.currentNavigationFragment
 import com.eburg_soft.mynews.presentation.screens.policies.PoliciesFragment
 import com.google.android.gms.ads.MobileAds
 import timber.log.Timber
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(layout.activity_main) {
 
@@ -19,7 +25,7 @@ class MainActivity : AppCompatActivity(layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        initAdMob()
+        initAdMob()
         initController()
 
         Timber.d("onCreate()")

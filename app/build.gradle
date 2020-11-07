@@ -103,9 +103,6 @@ dependencies {
     def material_version = "1.2.1"
     implementation "com.google.android.material:material:$material_version"
 
-    // AdMob
-    implementation 'com.google.android.gms:play-services-ads:19.5.0'
-
     // Paging
     def paging_version = "1.0.1"
     implementation "android.arch.paging:runtime:$paging_version"
@@ -156,6 +153,13 @@ dependencies {
 
     //  Logging TimberKt
     implementation 'com.github.ajalt:timberkt:1.5.1'
+
+
+    // AdMob
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+
+    // Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
 
     // -------- INSTRUMENTATION TESTS (use JUnit4)
 
