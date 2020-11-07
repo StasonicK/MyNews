@@ -38,17 +38,11 @@
             android:layout_marginBottom="@dimen/margin_normal"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/textviewCountryCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:text="US" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_small"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -57,21 +51,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
                 android:text="@string/agree" />
-
-            <TextView
-                android:id="@+id/textviewLanguageCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_normal"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:maxLines="3"
-                tools:text="IP" />
 
             <Button
                 android:id="@+id/buttonDeny"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
                 android:layout_marginEnd="@dimen/margin_normal"
                 android:text="@string/deny" />
         </LinearLayout>

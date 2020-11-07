@@ -14,12 +14,9 @@ import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.core.URL_GOOGLE_POLICIES
 import com.eburg_soft.mynews.extensions.injectViewModel
-import com.eburg_soft.mynews.utils.NetworkUtils
 import kotlinx.android.synthetic.main.fragment_policies.buttonAgree
 import kotlinx.android.synthetic.main.fragment_policies.buttonDeny
 import kotlinx.android.synthetic.main.fragment_policies.progressbarPoliciesFragment
-import kotlinx.android.synthetic.main.fragment_policies.textviewCountryCode
-import kotlinx.android.synthetic.main.fragment_policies.textviewLanguageCode
 import kotlinx.android.synthetic.main.fragment_policies.webView
 import timber.log.Timber
 import java.util.Locale
@@ -72,9 +69,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             Timber.d("url $url")
             loadUrl(url)
         }
-
-        textviewLanguageCode.text = language
-        textviewCountryCode.text = country
 
         buttonAgree.setOnClickListener {
             // remove that fragment from back stack

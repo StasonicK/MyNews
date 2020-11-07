@@ -9,6 +9,7 @@ import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.R.layout
 import com.eburg_soft.mynews.extensions.currentNavigationFragment
 import com.eburg_soft.mynews.presentation.screens.policies.PoliciesFragment
+import com.google.android.gms.ads.MobileAds
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(layout.activity_main) {
@@ -18,9 +19,16 @@ class MainActivity : AppCompatActivity(layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        initAdMob()
         initController()
 
         Timber.d("onCreate()")
+    }
+
+    private fun initAdMob() {
+        MobileAds.initialize(
+            this
+        ) { }
     }
 
     private fun initController() {

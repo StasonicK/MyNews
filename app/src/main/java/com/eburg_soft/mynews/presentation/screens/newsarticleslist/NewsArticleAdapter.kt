@@ -2,6 +2,7 @@ package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eburg_soft.mynews.R
@@ -27,8 +28,8 @@ class NewsArticleAdapter : PagedListAdapter<NewsArticleUiModel, NewsArticleHolde
                 publishedAt.text = item.publishedAt
 
                 itemView.setOnClickListener {
-//                    val direction = NewsArticlesListFragmentDirections.openDetailedNewsArticleFragment(item)
-//                    Navigation.findNavController(itemView).navigate(direction)
+                    val direction = NewsArticlesListFragmentDirections.openDetailedNewsArticleFragment(item)
+                    Navigation.findNavController(itemView).navigate(direction)
                 }
             }
         }
