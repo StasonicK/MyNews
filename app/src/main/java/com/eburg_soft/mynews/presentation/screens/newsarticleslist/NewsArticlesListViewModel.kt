@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.screens.newsarticleslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

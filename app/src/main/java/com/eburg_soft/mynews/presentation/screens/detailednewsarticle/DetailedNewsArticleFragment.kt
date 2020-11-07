@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.screens.detailednewsarticle
+package com.eburg_soft.mynews.presentation.detailednewsarticle
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
-import com.eburg_soft.mynews.presentation.detailednewsarticle.DetailedNewsArticleFragmentArgs
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.buttonOpenOriginalPage
@@ -43,7 +42,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
     }
 
     private fun getItem() {
-        mItem = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
+//        mItem = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
     }
 
     private fun setupUI() {

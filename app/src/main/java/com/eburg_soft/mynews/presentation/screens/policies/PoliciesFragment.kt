@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.screens.policies
+package com.eburg_soft.mynews.presentation.policies
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,11 +13,10 @@ import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
-import com.eburg_soft.mynews.presentation.screens.newsarticleslist.NewsArticlesListViewModel
 import com.eburg_soft.mynews.utils.NetworkUtils
-import kotlinx.android.synthetic.main.fragment_policies.IP
-import kotlinx.android.synthetic.main.fragment_policies.button_agree
-import kotlinx.android.synthetic.main.fragment_policies.button_deny
+import kotlinx.android.synthetic.main.fragment_policies.textviewIP
+import kotlinx.android.synthetic.main.fragment_policies.buttonAgree
+import kotlinx.android.synthetic.main.fragment_policies.buttonDeny
 import kotlinx.android.synthetic.main.fragment_policies.progressbarPoliciesFragment
 import kotlinx.android.synthetic.main.fragment_policies.webView
 import timber.log.Timber
@@ -28,8 +27,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
     private lateinit var toolbar: Toolbar
     private var savedInstanceState: Bundle? = null
 
-    var ipAddress: String? = null
-
+    private var ipAddress: String? = null
 
     private val viewModel: PoliciesViewModel by lazy {
         injectViewModel(PoliciesViewModel::class, Scopes.policies)
@@ -45,6 +43,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
         this.savedInstanceState = savedInstanceState
 
+        observerLiveData()
         setupUI()
         Timber.d("onActivityCreated()")
     }
@@ -71,9 +70,10 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             loadUrl(URL_GOOGLE_POLICIES)
             settings.javaScriptEnabled = true
         }
-        IP.text = ipAddress
 
-        button_agree.setOnClickListener {
+        textviewIP.text = ipAddress
+
+        buttonAgree.setOnClickListener {
             // remove that fragment from back stack
             findNavController(this)
                 .navigate(
@@ -87,7 +87,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
                 )
         }
 
-        button_deny.setOnClickListener {
+        buttonDeny.setOnClickListener {
             val startMain = Intent(Intent.ACTION_MAIN)
             startMain.addCategory(Intent.CATEGORY_HOME)
             startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -98,9 +98,8 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
         showLoading(false)
     }
 
-
     private fun observerLiveData() {
-        observe(viewModel.getCountryCode()) { showLoading(it) }
+        observe(viewModel.getCountryCode()) { ipAddress = it }
     }
 
     private fun showLoading(isLoading: Boolean) {

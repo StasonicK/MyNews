@@ -1,4 +1,4 @@
-package com.eburg_soft.mynews.presentation.screens.newsarticleslist
+package com.eburg_soft.mynews.presentation.newsarticleslist
 
 import androidx.recyclerview.widget.DiffUtil
 import com.eburg_soft.mynews.presentation.models.NewsArticleUi
