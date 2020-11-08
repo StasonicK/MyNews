@@ -1,6 +1,9 @@
 package com.eburg_soft.mynews.core
 
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.BuildConfig
 import com.eburg_soft.mynews.data.di.NetworkModule
