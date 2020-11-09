@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.webkit.CookieManager
 import android.webkit.WebSettings
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -65,7 +64,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             settings.defaultTextEncodingName = "utf-8"
             settings.javaScriptEnabled = true
             settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-            
+
             val url = "${URL_GOOGLE_POLICIES}?hl=${language}-${country}"
             Timber.d("url $url")
             loadUrl(url)

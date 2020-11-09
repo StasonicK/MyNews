@@ -46,12 +46,7 @@
     <!-- Detailed News Screen style -->
     <style name="NewsArticleDetailed" />
 
-    <style name="NewsArticleDetailed.View">
-        <item name="android:scaleType">centerCrop</item>
-    </style>
-
     <style name="NewsArticleDetailed.Image">
-        <item name="android:scaleType">centerCrop</item>
         <item name="android:src">@drawable/image_placeholder</item>
     </style>
 
