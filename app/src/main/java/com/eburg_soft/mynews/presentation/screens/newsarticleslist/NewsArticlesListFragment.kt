@@ -7,8 +7,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.R
+import com.eburg_soft.mynews.data.di.Scopes
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
