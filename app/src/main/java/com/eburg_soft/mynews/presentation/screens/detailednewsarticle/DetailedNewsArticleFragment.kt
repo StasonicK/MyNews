@@ -10,22 +10,18 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
+import com.eburg_soft.mynews.databinding.FragmentDetailedNewsArticleBinding
+import com.eburg_soft.mynews.extensions.viewLifecycleLazy
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration.Builder
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.adView
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewAuthor
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewDescription
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewPublishedAt
-import kotlinx.android.synthetic.main.fragment_detailed_news_article.textViewTitle
 import timber.log.Timber
 
 class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_article) {
 
-    private lateinit var toolbar: Toolbar
+    private val binding by viewLifecycleLazy { FragmentDetailedNewsArticleBinding.bind(requireView()) }
 
     private lateinit var newsArticleUiModel: NewsArticleUiModel
 
@@ -49,8 +45,8 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
     }
 
     private fun setupUI() {
-        toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
-        toolbar.apply {
+//        toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
+        binding.toolbarDetailedNewsFragment.root.apply {
             setTitle(R.string.app_name)
             setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
             setNavigationOnClickListener {
@@ -58,17 +54,17 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             }
         }
 
-        textViewAuthor.text = newsArticleUiModel.author
-        textViewTitle.text = newsArticleUiModel.title
-        textViewDescription.text = newsArticleUiModel.description
-        textViewPublishedAt.text = newsArticleUiModel.publishedAt
+        binding.textViewAuthor.text = newsArticleUiModel.author
+        binding.textViewTitle.text = newsArticleUiModel.title
+        binding.textViewDescription.text = newsArticleUiModel.description
+        binding.textViewPublishedAt.text = newsArticleUiModel.publishedAt
 
         Picasso.get()
             .load(newsArticleUiModel.urlToImage)
+            .placeholder(R.drawable.image_placeholder)
             .fit()
             .centerCrop()
-            .placeholder(R.drawable.image_placeholder)
-            .into(imageViewNews)
+            .into(binding.imageViewNews)
 
         // handle back button
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -93,7 +89,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
 //        for (i in 0..999) {
         val adRequest = AdRequest.Builder()
             .build()
-        adView.loadAd(adRequest)
+        binding.adView.loadAd(adRequest)
         Timber.d("adRequest: $adRequest")
 //        }
     }

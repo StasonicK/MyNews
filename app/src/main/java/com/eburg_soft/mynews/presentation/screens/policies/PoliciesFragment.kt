@@ -17,26 +17,22 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions.Builder
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.core.URL_GOOGLE_POLICIES
-import kotlinx.android.synthetic.main.fragment_policies.buttonAgree
-import kotlinx.android.synthetic.main.fragment_policies.buttonDeny
-import kotlinx.android.synthetic.main.fragment_policies.progressbarPoliciesFragment
-import kotlinx.android.synthetic.main.fragment_policies.webView
+import com.eburg_soft.mynews.databinding.FragmentPoliciesBinding
+import com.eburg_soft.mynews.extensions.viewLifecycleLazy
 import timber.log.Timber
 import java.util.Locale
 
 class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
-//    private var cookieStore = CookieStore()
+    private val binding by viewLifecycleLazy { FragmentPoliciesBinding.bind(requireView()) }
 
-    private lateinit var toolbar: Toolbar
-
-    private val webHandler: Handler = object : Handler() {
+    private val webHandler: Handler = @SuppressLint("HandlerLeak")
+    object : Handler() {
         @SuppressLint("HandlerLeak")
         override fun handleMessage(message: Message) {
             when (message.what) {
@@ -55,7 +51,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
         super.onActivityCreated(savedInstanceState)
 
         if (savedInstanceState != null) {
-            webView.restoreState(savedInstanceState)
+            binding.webView.restoreState(savedInstanceState)
         }
         setupUI()
 
@@ -64,21 +60,19 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        webView.saveState(outState)
+        binding.webView.saveState(outState)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupUI() {
-
-        toolbar = activity?.findViewById(R.id.toolbarPoliciesFragment)!!
-        toolbar.setTitle(R.string.app_name)
+        binding.toolbarPoliciesFragment.root.title = getString(R.string.app_name)
 
         val language = Locale.getDefault().language
         Timber.d("language $language")
         val country = Locale.getDefault().country
         Timber.d("country $country")
 
-        webView.apply {
+        binding.webView.apply {
 
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
@@ -102,10 +96,10 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             }
 
             if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-                CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
+                CookieManager.getInstance().setAcceptThirdPartyCookies(binding.webView, true)
             }
 
-            val settings: WebSettings = webView.settings
+            val settings: WebSettings = binding.webView.settings
             settings.apply {
                 // set encoding type "UTF-8" for avoiding issues
                 defaultTextEncodingName = "utf-8"
@@ -134,7 +128,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             })
         }
 
-        buttonAgree.setOnClickListener {
+        binding.buttonAgree.setOnClickListener {
             // remove that fragment from back stack
             findNavController(this)
                 .navigate(
@@ -148,7 +142,7 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
                 )
         }
 
-        buttonDeny.setOnClickListener {
+        binding.buttonDeny.setOnClickListener {
             val startMain = Intent(Intent.ACTION_MAIN)
             startMain.addCategory(Intent.CATEGORY_HOME)
             startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -158,14 +152,14 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        progressbarPoliciesFragment.apply {
+        binding.progressbarPoliciesFragment.root.apply {
             visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 
-    fun webViewCanGoBack(): Boolean = webView.canGoBack()
+    fun webViewCanGoBack(): Boolean = binding.webView.canGoBack()
 
     fun webViewGoBack() {
-        webView.goBack()
+        binding.webView.goBack()
     }
 }
