@@ -2,6 +2,9 @@ package com.eburg_soft.mynews.presentation.screens.policies
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -9,7 +12,11 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnKeyListener
+import android.webkit.CookieManager
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions.Builder
@@ -25,10 +32,12 @@ import java.util.Locale
 
 class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
+//    private var cookieStore = CookieStore()
+
     private lateinit var toolbar: Toolbar
-    private var savedInstanceState: Bundle? = null
 
     private val webHandler: Handler = object : Handler() {
+        @SuppressLint("HandlerLeak")
         override fun handleMessage(message: Message) {
             when (message.what) {
                 1 -> {
@@ -45,17 +54,21 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        this.savedInstanceState = savedInstanceState
-
-        observerLiveData()
+        if (savedInstanceState != null) {
+            webView.restoreState(savedInstanceState)
+        }
         setupUI()
 
         Timber.d("onActivityCreated()")
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        webView.saveState(outState)
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupUI() {
-        showLoading(true)
 
         toolbar = activity?.findViewById(R.id.toolbarPoliciesFragment)!!
         toolbar.setTitle(R.string.app_name)
@@ -67,21 +80,52 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
         webView.apply {
 
-            // set encoding type "UTF-8" for avoiding issues
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
+
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    showLoading(true)
+                    view?.loadUrl(url ?: URL_GOOGLE_POLICIES)
+                    return super.shouldOverrideUrlLoading(view, url)
+                }
+
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    showLoading(false)
+                    super.onPageFinished(view, url)
+                }
+            }
+
+            if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+                CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
+            }
+
             val settings: WebSettings = webView.settings
-            settings.javaScriptEnabled = true
-            settings.defaultTextEncodingName = "utf-8"
-            settings.javaScriptEnabled = true
-            settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            settings.apply {
+                // set encoding type "UTF-8" for avoiding issues
+                defaultTextEncodingName = "utf-8"
+                javaScriptEnabled = true;
+                setGeolocationEnabled(true);
+                setAppCacheEnabled(true);
+                databaseEnabled = true;
+                domStorageEnabled = true;
+                cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            }
+
+            requestFocus()
 
             val url = "${URL_GOOGLE_POLICIES}?hl=${language}-${country}"
             Timber.d("url $url")
             loadUrl(url)
 
-
             setOnKeyListener(object : OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && event.action == MotionEvent.ACTION_UP && webView.canGoBack()) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.action == MotionEvent.ACTION_UP && webViewCanGoBack()) {
                         webHandler.sendEmptyMessage(1)
                         return true
                     }
@@ -111,11 +155,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             startMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(startMain)
         }
-
-        showLoading(false)
-    }
-
-    private fun observerLiveData() {
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -126,7 +165,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
 
     fun webViewCanGoBack(): Boolean = webView.canGoBack()
 
-    //
     fun webViewGoBack() {
         webView.goBack()
     }
