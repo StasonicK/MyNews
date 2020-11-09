@@ -10,6 +10,7 @@ import com.eburg_soft.mynews.R.layout
 import com.eburg_soft.mynews.extensions.currentNavigationFragment
 import com.eburg_soft.mynews.presentation.screens.policies.PoliciesFragment
 import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.fragment_policies.webView
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(layout.activity_main) {
@@ -38,11 +39,15 @@ class MainActivity : AppCompatActivity(layout.activity_main) {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         val policiesFragment = supportFragmentManager.currentNavigationFragment as PoliciesFragment
-
         if ((keyCode == KeyEvent.KEYCODE_BACK) && policiesFragment.webViewCanGoBack()) {
             policiesFragment.webViewGoBack()
             return true
         }
+
+//        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+//            webView.goBack()
+//            return true
+//        }
         return super.onKeyDown(keyCode, event)
     }
 }
