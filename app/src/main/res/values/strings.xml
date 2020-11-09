@@ -5,6 +5,7 @@
     <!-- Services' ids -->
     <string name="facebook_app_id">1241659876206696</string>
     <string name="ad_mob_id">ca-app-pub-8721640890137447~6974411815</string>
+    <string name="bottom_banner_id">ca-app-pub-8721640890137447/3335044543</string>
 
     <!-- Content Description -->
     <string name="news_image_desc">News Image</string>
@@ -29,9 +30,6 @@
         of he residence consisted up in remainder arranging described. Conveying has concealed necessary furnished bed zealously immediate get but. Terminated
         as middletons or by instrument. Bred do four so your felt with. No shameless principle dependent household do. Bringing so sociable felicity supplied
         mr. September suspicion far him two acuteness perfectly. Covered as an examine so regular of. Ye astonished friendship remarkably no.</string>
-    <string name="button_open_original_page">Open original page</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="agree">Agree</string>
     <string name="deny">Deny</string>
 </resources>

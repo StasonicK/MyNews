@@ -161,9 +161,12 @@ dependencies {
     // Facebook SDK
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
 
-    // Google and Firebase
+    // Firebase
     implementation "com.google.gms:google-services:4.3.4"
+
+    // Google
     implementation 'com.google.firebase:firebase-core:18.0.0'
+    // collapse images with wrap height, should use explicit size
     implementation 'com.google.firebase:firebase-inappmessaging-display:19.1.2'
 
     // -------- INSTRUMENTATION TESTS (use JUnit4)

@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
-import com.google.android.gms.ads.AdRequest.Builder
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration.Builder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.adView
 import kotlinx.android.synthetic.main.fragment_detailed_news_article.imageViewNews
@@ -83,15 +85,17 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             }
         )
 
+        val testDeviceIds: List<String> = listOf("1C32CE28B535D98D63750D869B1813AF")
+        val configuration = Builder().setTestDeviceIds(testDeviceIds).build()
+        MobileAds.setRequestConfiguration(configuration)
+
         // launch advertisement banner
-//        val adRequest = AdRequest.Builder().build()
-//        adView.loadAd(adRequest)
-        for (i in 0..999) {
-            val adRequest = Builder()
-                .addTestDevice("B431EE858B5F1986E4D89CA31250F732")
-                .build()
-            adView.loadAd(adRequest)
-        }
+//        for (i in 0..999) {
+        val adRequest = AdRequest.Builder()
+            .build()
+        adView.loadAd(adRequest)
+        Timber.d("adRequest: $adRequest")
+//        }
     }
 
     override fun onCreateView(

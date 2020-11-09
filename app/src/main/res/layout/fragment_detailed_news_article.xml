@@ -19,20 +19,22 @@
         android:id="@+id/imageViewNews"
         style="@style/NewsArticleDetailed.Image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/image_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailedNewsFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailedNewsFragment"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textViewAuthor"
         style="@style/NewsArticleDetailed.Author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal"
         android:text="@string/holder_author"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewNews"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -53,7 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         tools:text="@string/holder_description" />
@@ -71,19 +72,16 @@
         tools:text="01.01.2021" />
 
     <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8721640890137447/3335044543"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintStart_toStartOf="parent" />
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8721640890137447/3335044543"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
