@@ -1,10 +1,10 @@
 package com.eburg_soft.mynews.core
 
 import android.app.Application
-import com.eburg_soft.currencyconverter.data.di.Scopes
 import com.eburg_soft.mynews.BuildConfig
 import com.eburg_soft.mynews.data.di.NetworkModule
 import com.eburg_soft.mynews.data.di.RepositoryModule
+import com.eburg_soft.mynews.data.di.Scopes
 import timber.log.Timber
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
