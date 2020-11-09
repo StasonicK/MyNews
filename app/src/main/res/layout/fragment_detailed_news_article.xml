@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailedNewsFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailedNewsFragment"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textViewAuthor"
@@ -77,11 +78,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8721640890137447/3335044543"
+        ads:adUnitId="@string/bottom_banner_id"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent" />
