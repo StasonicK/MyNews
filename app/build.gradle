@@ -35,6 +35,10 @@ android {
         }
     }
 
+    viewBinding {
+        enabled = true
+    }
+
     buildTypes {
         release {
             shrinkResources true
@@ -101,6 +105,13 @@ dependencies {
     def fragment_version = "1.2.5" // must use for a container
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
+    // lifecycle
+    def lifecycle_version = "2.2.0" // must use for a container
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
     // Material design
     def material_version = "1.2.1"
     implementation "com.google.android.material:material:$material_version"
@@ -119,13 +130,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:$room_version"
-
-    //  ViewModel and LiveData
-    def lifecycle_version = '2.2.0'
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Network
     def retrofit_version = '2.9.0'

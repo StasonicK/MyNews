@@ -25,15 +25,15 @@ class NewsArticlesListViewModel @Inject constructor(private val repository: Repo
 
         val config = PagedList.Config.Builder()
             .setPageSize(PAGE_SIZE)
-            .setEnablePlaceholders(false)
+            .setEnablePlaceholders(true)
             .build()
 
-        getTopHeadlinesInTheUs(config)
+        getNewsArticlesFromApi(config)
     }
 
-    fun getNewsList(): LiveData<PagedList<NewsArticleUiModel>>? = mNewsListModel
+    fun getNewsArticlesListLiveData(): LiveData<PagedList<NewsArticleUiModel>>? = mNewsListModel
 
-    private fun getTopHeadlinesInTheUs(config: PagedList.Config) {
+    private fun getNewsArticlesFromApi(config: PagedList.Config) {
         viewModelScope.launch {
             // show progressbar
             isLoadingMutableLiveData.value = true
