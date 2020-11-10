@@ -90,7 +90,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
                     }
 
                     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                        showLoading(true)
                         view?.loadUrl(url ?: URL_GOOGLE_POLICIES)
                         return super.shouldOverrideUrlLoading(view, url)
                     }
@@ -100,7 +99,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
-                        showLoading(false)
                         super.onPageFinished(view, url)
                     }
                 }
@@ -160,12 +158,6 @@ class PoliciesFragment : Fragment(R.layout.fragment_policies) {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
-        }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressbarPoliciesFragment.root.apply {
-            visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 

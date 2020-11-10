@@ -18,6 +18,7 @@
 
     <!-- sizes -->
     <dimen name="textview_size_header">16sp</dimen>
-    <dimen name="image_size">180dp</dimen>
+    <dimen name="image_height_portrait">240dp</dimen>
+    <dimen name="image_height_landscape">300dp</dimen>
     <dimen name="textview_size_small">12sp</dimen>
 </resources>

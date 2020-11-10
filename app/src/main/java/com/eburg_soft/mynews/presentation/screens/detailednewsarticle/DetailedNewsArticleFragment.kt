@@ -1,10 +1,9 @@
 package com.eburg_soft.mynews.presentation.screens.detailednewsarticle
 
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -58,7 +57,7 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
     }
 
     private fun setupUI() {
-        binding!!.apply {
+        binding.apply {
             toolbarDetailedNewsFragment.root.apply {
                 setTitle(R.string.app_name)
                 setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
@@ -71,6 +70,16 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             textViewTitle.text = newsArticleUiModel.title
             textViewDescription.text = newsArticleUiModel.description
             textViewPublishedAt.text = newsArticleUiModel.publishedAt
+            var width = 0
+            var height = 0
+            val thread = Thread {
+                val downloadedImage: Bitmap = Picasso.get().load(newsArticleUiModel.urlToImage).get()
+                 width = downloadedImage.width
+                 height = downloadedImage.height
+                Timber.d("width: $width")
+                Timber.d("height: $height")
+            }
+            thread.start()
 
             Picasso.get()
                 .load(newsArticleUiModel.urlToImage)
@@ -81,12 +90,12 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
                 .into(imageViewNews)
 
             // launch advertisement banner
-            //        for (i in 0..999) {
+//          for (i in 0..999) {
             val adRequest = AdRequest.Builder()
                 .build()
             adView.loadAd(adRequest)
             Timber.d("adRequest: $adRequest")
-            //        }
+//          }
         }
 
         // handle back button
