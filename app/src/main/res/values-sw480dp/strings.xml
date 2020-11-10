@@ -1,0 +1,29 @@
+<resources>
+    <!-- App details -->
+    <string name="app_name">My News</string>
+
+    <!-- Services' ids -->
+    <string name="facebook_app_id">1241659876206696</string>
+    <string name="ad_mob_id">ca-app-pub-8721640890137447~6974411815</string>
+    <string name="bottom_banner_id">ca-app-pub-8721640890137447/3335044543</string>
+
+    <!-- Content Description -->
+    <string name="news_image_desc">News Image</string>
+    <string name="news_image">news image</string>
+    <string name="holder_author">BBC</string>
+    <string name="holder_date">11.04.2020</string>
+    <string name="holder_title">Pugacheva divorced Galkin yesterday!</string>
+    <string name="holder_description">Received overcame oh sensible so at an. Formed do change merely to county it. Am separate contempt domestic to to oh.
+        On relation my so addition branched. Put hearing cottage she norland letters equally prepare too. Replied exposed savings he no viewing as up. Soon
+        body add him hill. No father living really people estate if. Mistake do produce beloved demesne if am pursuit. Oh acceptance apartments up sympathize
+        astonished delightful. Waiting him new lasting towards. Continuing melancholy especially so to. Me unpleasing impossible in attachment announcing so
+        astonished. What ask leaf may nor upon door. Tended remain my do stairs. Oh smiling amiable am so visited cordial in offices hearted. Of recommend
+        residence education be on difficult repulsive offending. Judge views had mirth table seems great him for her. Alone all happy asked begin fully stand
+        own get. Excuse ye seeing result of we. See scale dried songs old may not. Promotion did disposing you household any instantly. Hills we do under
+        times at first short an. Death weeks early had their and folly timed put. Hearted forbade on an village ye in fifteen. Age attended betrayed her man
+        raptures laughter. Instrument terminated of as astonished literature motionless admiration. The affection are determine how performed intention
+        discourse but. On merits on so valley indeed assure of. Has add particular boisterous uncommonly are. Early wrong as so manor match. Him necessary
+        shameless discovery consulted one but. Necessary ye contented newspaper zealously breakfast he prevailed.</string>
+    <string name="agree">Agree</string>
+    <string name="deny">Deny</string>
+</resources>

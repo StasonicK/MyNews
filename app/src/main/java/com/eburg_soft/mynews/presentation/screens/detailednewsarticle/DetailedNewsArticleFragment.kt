@@ -70,16 +70,6 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
             textViewTitle.text = newsArticleUiModel.title
             textViewDescription.text = newsArticleUiModel.description
             textViewPublishedAt.text = newsArticleUiModel.publishedAt
-            var width = 0
-            var height = 0
-            val thread = Thread {
-                val downloadedImage: Bitmap = Picasso.get().load(newsArticleUiModel.urlToImage).get()
-                 width = downloadedImage.width
-                 height = downloadedImage.height
-                Timber.d("width: $width")
-                Timber.d("height: $height")
-            }
-            thread.start()
 
             Picasso.get()
                 .load(newsArticleUiModel.urlToImage)

@@ -2,11 +2,9 @@ package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.data.di.Scopes
 import com.eburg_soft.mynews.databinding.FragmentNewsArticlesListBinding
@@ -14,7 +12,6 @@ import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import kotlinx.android.synthetic.main.fragment_news_articles_list.recyclerviewNewsArticles
-import timber.log.Timber
 
 class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) {
 
@@ -74,7 +71,6 @@ class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) 
     private fun showNewsList(newsModels: PagedList<NewsArticleUiModel>) {
         populateNewsList(newsModels)
     }
-
 
     private fun populateNewsList(newsModels: PagedList<NewsArticleUiModel>) {
         binding.recyclerviewNewsArticles.apply {
