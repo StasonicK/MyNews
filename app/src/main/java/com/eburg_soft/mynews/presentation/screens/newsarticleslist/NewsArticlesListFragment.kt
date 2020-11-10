@@ -2,9 +2,7 @@ package com.eburg_soft.mynews.presentation.screens.newsarticleslist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +11,13 @@ import com.eburg_soft.mynews.data.di.Scopes
 import com.eburg_soft.mynews.databinding.FragmentNewsArticlesListBinding
 import com.eburg_soft.mynews.extensions.injectViewModel
 import com.eburg_soft.mynews.extensions.observe
-import com.eburg_soft.mynews.extensions.viewLifecycleLazy
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import timber.log.Timber
 
 class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) {
 
-    private val binding by viewLifecycleLazy { FragmentNewsArticlesListBinding.bind(requireView()) }
+    private var _binding: FragmentNewsArticlesListBinding? = null
+    private val binding get() = _binding!!
 
     private var savedInstanceState: Bundle? = null
     private val newsArticleAdapter = NewsArticleAdapter()
@@ -33,19 +31,21 @@ class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) 
         private const val KEY_LAST_ITEM_POSITION = "KEY_LAST_ITEM_POSITION"
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    //region ====================== Android methods ======================
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         this.savedInstanceState = savedInstanceState
+        _binding = FragmentNewsArticlesListBinding.bind(view)
 
         setupUI()
         observerLiveData()
-        Timber.d("onActivityCreated()")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        return super.onCreateView(inflater, container, savedInstanceState)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -74,7 +74,6 @@ class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) 
     private fun restorePreviousUIState() {
         savedInstanceState?.let {
             val lastItemPosition = it.getInt(KEY_LAST_ITEM_POSITION)
-//            recyclerviewNewsArticles.scrollToPosition(lastItemPosition)
             binding.recyclerviewNewsArticles.scrollToPosition(lastItemPosition)
             Timber.d("$KEY_LAST_ITEM_POSITION is $lastItemPosition")
         }
@@ -98,7 +97,6 @@ class NewsArticlesListFragment : Fragment(R.layout.fragment_news_articles_list) 
         binding.recyclerviewNewsArticles.apply {
             layoutManager?.let { it ->
                 val lastVisibleItemPosition = (it as LinearLayoutManager).findLastVisibleItemPosition()
-
                 outState.putInt(KEY_LAST_ITEM_POSITION, lastVisibleItemPosition)
             }
         }

@@ -6,12 +6,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eburg_soft.mynews.R
 import com.eburg_soft.mynews.databinding.FragmentDetailedNewsArticleBinding
-import com.eburg_soft.mynews.extensions.viewLifecycleLazy
 import com.eburg_soft.mynews.presentation.models.NewsArticleUiModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -21,50 +19,75 @@ import timber.log.Timber
 
 class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_article) {
 
-    private val binding by viewLifecycleLazy { FragmentDetailedNewsArticleBinding.bind(requireView()) }
+    private var _binding: FragmentDetailedNewsArticleBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var newsArticleUiModel: NewsArticleUiModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    //region ====================== Android methods ======================
 
-        retainInstance = true
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        _binding = FragmentDetailedNewsArticleBinding.bind(view)
 
         getItem()
         setupUI()
-
-        Timber.d("onActivityCreated()")
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            // handle navigateUp
+            android.R.id.home -> {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    //endregion
 
     private fun getItem() {
         newsArticleUiModel = DetailedNewsArticleFragmentArgs.fromBundle(requireArguments()).url
     }
 
     private fun setupUI() {
-//        toolbar = view?.findViewById(R.id.toolbarDetailedNewsFragment)!!
-        binding.toolbarDetailedNewsFragment.root.apply {
-            setTitle(R.string.app_name)
-            setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
-            setNavigationOnClickListener {
-                Navigation.findNavController(requireView()).navigateUp()
+        binding!!.apply {
+            toolbarDetailedNewsFragment.root.apply {
+                setTitle(R.string.app_name)
+                setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
+                setNavigationOnClickListener {
+                    Navigation.findNavController(requireView()).navigateUp()
+                }
             }
+
+            textViewAuthor.text = newsArticleUiModel.author
+            textViewTitle.text = newsArticleUiModel.title
+            textViewDescription.text = newsArticleUiModel.description
+            textViewPublishedAt.text = newsArticleUiModel.publishedAt
+
+            Picasso.get()
+                .load(newsArticleUiModel.urlToImage)
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.ic_error)
+                .fit()
+                .centerCrop()
+                .into(imageViewNews)
+
+            // launch advertisement banner
+            //        for (i in 0..999) {
+            val adRequest = AdRequest.Builder()
+                .build()
+            adView.loadAd(adRequest)
+            Timber.d("adRequest: $adRequest")
+            //        }
         }
-
-        binding.textViewAuthor.text = newsArticleUiModel.author
-        binding.textViewTitle.text = newsArticleUiModel.title
-        binding.textViewDescription.text = newsArticleUiModel.description
-        binding.textViewPublishedAt.text = newsArticleUiModel.publishedAt
-
-        Picasso.get()
-            .load(newsArticleUiModel.urlToImage)
-            .placeholder(R.drawable.image_placeholder)
-            .fit()
-            .centerCrop()
-            .into(binding.imageViewNews)
 
         // handle back button
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -84,32 +107,5 @@ class DetailedNewsArticleFragment : Fragment(R.layout.fragment_detailed_news_art
         val testDeviceIds: List<String> = listOf("1C32CE28B535D98D63750D869B1813AF")
         val configuration = Builder().setTestDeviceIds(testDeviceIds).build()
         MobileAds.setRequestConfiguration(configuration)
-
-        // launch advertisement banner
-//        for (i in 0..999) {
-        val adRequest = AdRequest.Builder()
-            .build()
-        binding.adView.loadAd(adRequest)
-        Timber.d("adRequest: $adRequest")
-//        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detailed_news_article, container, false)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            // handle navigateUp
-            android.R.id.home -> {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
